@@ -1,0 +1,30 @@
+<?php
+
+namespace App\Http\Resources;
+
+use App\Models\Courier;
+use Illuminate\Http\Request;
+use Illuminate\Http\Resources\Json\JsonResource;
+
+/**
+ * @mixin Courier
+ */
+class CourierResource extends JsonResource
+{
+    public function toArray(Request $request): array
+    {
+        return [
+            'id' => $this->id,
+            'name' => $this->name,
+            'phone' => $this->phone,
+            'email' => $this->email,
+            'level' => $this->level,
+            'vehicle_type' => $this->vehicle_type?->value,
+            'vehicle_plate_number' => $this->vehicle_plate_number,
+            'address' => $this->address,
+            'is_active' => $this->is_active,
+            'registered_at' => $this->created_at?->toIso8601String(),
+            'updated_at' => $this->updated_at?->toIso8601String(),
+        ];
+    }
+}
